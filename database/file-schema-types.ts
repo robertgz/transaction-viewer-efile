@@ -19,18 +19,36 @@ const filesSchemaLiteral = {
       type: 'string',
       maxLength: 50, // <- the primary key must have set maxLength
     },
+    attachmentId: {
+      type: 'string',
+    },
     fileName: {
       type: 'string',
+    },
+    size: {
+      type: 'number',
+    },
+    lastModified: {
+      type: 'number',
+    },
+    uploadedAt: {
+      "type": "string",
+      "format": "date-time"
+      // https://opis.io/json-schema/2.x/formats.html#date-time
     },
     year: {
       // examples: 2018, 2020
       type: 'string',
       length: 4,
+      default: '',
     },
-    size: {
-      type: 'number',
+    software: {
+      // examples: EFILE, NETFILE
+      type: 'string',
+      default: '',
     },
-    ready: { // should be false until after attachment has been added 
+    ready: { 
+      // should be false during long running actions on the file 
       type: 'boolean',
       default: false,
     },
@@ -42,13 +60,9 @@ const filesSchemaLiteral = {
       type: 'boolean',
       default: false,
     },
-    lastModified: {
-      type: 'number',
-    },
-    uploadedAt: {
-      "type": "string",
-      "format": "date-time"
-      // https://opis.io/json-schema/2.x/formats.html#date-time
+    processing: {
+      type: 'boolean',
+      default: false,
     },
   },
   attachments: {
